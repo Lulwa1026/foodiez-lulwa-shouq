@@ -41,7 +41,7 @@ exports.updateRecipe = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
   try {
-    const newRecipe = await Books.create(req.body);
+    const newRecipe = await Recipes.create(req.body);
     return res.status(201).json(newRecipe);
   } catch (error) {
     return res.status(500).json({ message: error.message });
