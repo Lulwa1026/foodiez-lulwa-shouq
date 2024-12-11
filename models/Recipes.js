@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Categories = require("./Categories");
 
 const recipeSchema = mongoose.Schema(
   {
@@ -7,6 +8,7 @@ const recipeSchema = mongoose.Schema(
     },
     ingredients: {
       type: Array,
+      ref: Categories,
     },
     instructions: {
       type: String,

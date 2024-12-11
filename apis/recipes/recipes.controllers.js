@@ -1,7 +1,7 @@
 const Recipes = require("../../models/Recipes");
 
 exports.getRecipes = async (req, res) => {
-  const recipes = await Recipes.find();
+  const recipes = await Recipes.find().populate;
   return res.json(recipes);
 };
 
@@ -41,7 +41,7 @@ exports.updateRecipe = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
   try {
-    const newRecipe = await Recipes.create(req.body);
+    const newRecipe = await Recipes.create(req.body).populate;
     return res.status(201).json(newRecipe);
   } catch (error) {
     return res.status(500).json({ message: error.message });
