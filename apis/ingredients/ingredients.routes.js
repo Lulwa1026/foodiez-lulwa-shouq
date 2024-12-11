@@ -8,7 +8,7 @@ const {
 } = require("./ingredients.controllers");
 router.get("/", getController);
 router.post("/", newIngredientController);
-router.delete("/:id", deleteIngredientController);
-router.put("/:id", updateIngredientController);
+router.delete("/:ingredientId", deleteIngredientController);
+router.put("/:ingredientId", updateIngredientController);
 
 module.exports = router;

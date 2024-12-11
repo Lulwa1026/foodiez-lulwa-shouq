@@ -12,8 +12,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/recipes", recipeRoutes);
 app.use("/categaries", categaryRoutes);
+app.use("/recipes", recipeRoutes);
 app.use("/ingredients", ingredientRoutes);
 
 connectDB();

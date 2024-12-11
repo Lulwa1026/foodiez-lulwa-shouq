@@ -19,9 +19,9 @@ exports.newIngredientController = async (req, res) => {
 };
 
 exports.deleteIngredientController = async (req, res) => {
-  const { ingredientstId } = req.params;
+  const { ingredientId } = req.params;
   try {
-    const foundIngredient = await Ingredients.findById(ingredientstId);
+    const foundIngredient = await Ingredients.findById(ingredientId);
     if (foundIngredient) {
       await foundIngredient.deleteOne();
       res.status(204).json();
@@ -34,9 +34,9 @@ exports.deleteIngredientController = async (req, res) => {
 };
 
 exports.updateIngredientController = async (req, res) => {
-  const { ingredientstId } = req.params;
+  const { ingredientId } = req.params;
   try {
-    const foundIngredient = await Ingredients.findById(ingredientstId);
+    const foundIngredient = await Ingredients.findById(ingredientId);
     if (foundIngredient) {
       await foundIngredient.updateOne(req.body);
       res.status(200).json({ message: "ingredient Updated Successfully" });

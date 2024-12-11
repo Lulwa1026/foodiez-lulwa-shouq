@@ -8,7 +8,7 @@ const {
 } = require("./categaries.controllers");
 router.get("/", getController);
 router.post("/", newCategaryController);
-router.delete("/:id", deletenewCategaryController);
-router.put("/:id", updatenewCategaryController);
+router.delete("/:categariestId", deletenewCategaryController);
+router.put("/:categariestId", updatenewCategaryController);
 
 module.exports = router;
