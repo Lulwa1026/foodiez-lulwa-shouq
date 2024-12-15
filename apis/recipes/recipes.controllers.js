@@ -53,12 +53,15 @@ exports.updateRecipe = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
   try {
+
     const newRecipe = await Recipes.create(req.body);
 
     // const foundCategory = Categories.findById(req.body.category)
     await Categories.findByIdAndUpdate(req.body.category, {
       $push: { recipes: newRecipe._id },
     });
+
+    const newRecipe = await Recipes.create(req.body).populate;
 
     return res.status(201).json(newRecipe);
   } catch (error) {
