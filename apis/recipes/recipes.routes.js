@@ -15,6 +15,6 @@ router.get("/:id", getRecipe); //Get recipe by id
 router.post("/", createRecipe); //add recipe
 router.post("/:recipeId/add/:ingredientId", addIngredient);
 router.put("/:id", updateRecipe); //Edit recipe
-router.delete("/:id", deleteRecipe); //Delete recipe
+router.delete("/:id", deleteRecipe);
 
 module.exports = router;
