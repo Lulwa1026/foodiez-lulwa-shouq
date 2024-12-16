@@ -1,15 +1,17 @@
-const mongoose = require("mongoose");
-const Categories = require("./Categories");
+const { model, Schema } = require("mongoose");
 
-const recipeSchema = mongoose.Schema(
+const RecipeSchema = new Schema(
   {
     title: {
       type: String,
     },
-    ingredients: {
-      type: Array,
-      ref: Categories,
-    },
+    ingredients: [
+      {
+        type: Schema.Types.ObjectId,
+
+        ref: "Ingredients",
+      },
+    ],
     instructions: {
       type: String,
     },
@@ -19,12 +21,12 @@ const recipeSchema = mongoose.Schema(
     coverImage: {
       type: String,
     },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  },
-  { timestamps: true }
+    // createdBy: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
+  }
+  //   { timestamps: true }
 );
 
-module.exports = mongoose.model("Recipes", recipeSchema);
+module.exports = model("Recipes", RecipeSchema);

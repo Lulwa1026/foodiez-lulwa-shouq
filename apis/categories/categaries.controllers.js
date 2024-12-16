@@ -2,7 +2,7 @@ const Categaries = require("../../models/Categories");
 
 exports.getController = async (req, res) => {
   try {
-    const categaries = await Categaries.find();
+    const categaries = await Categaries.find().populate("recipes");
     res.json(categaries);
   } catch (error) {
     res.status(500).json({ message: error.message });

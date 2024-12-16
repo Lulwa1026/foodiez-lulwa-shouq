@@ -5,6 +5,7 @@ const {
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  addIngredientToRecipe,
 } = require("./recipes.controllers");
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.get("/:id", getRecipe); //Get recipe by id
 router.post("/", createRecipe); //add recipe
 router.put("/:id", updateRecipe); //Edit recipe
 router.delete("/:id", deleteRecipe); //Delete recipe
+router.post("/:recipeId/add/:ingredientId", addIngredientToRecipe);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const Recipes = require("../../models/Recipes");
 
 exports.getRecipes = async (req, res) => {
-  const recipes = await Recipes.find().populate;
+  const recipes = await Recipes.find().populate("ingrediets");
   return res.json(recipes);
 };
 
@@ -46,4 +46,13 @@ exports.createRecipe = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+};
+
+exports.addIngredientToRecipe = async (req, res) => {
+  const { recipeId, ingredientId } = req.params;
+  const recipe = await Recipes.findById(recipeId);
+  const updateRecipe = await recipe.updateOne({
+    $push: { ingredients: ingredientId },
+  });
+  res.status(200).json(updateRecipe);
 };
