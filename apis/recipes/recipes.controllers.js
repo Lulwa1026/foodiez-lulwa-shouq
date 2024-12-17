@@ -35,6 +35,9 @@ exports.updateRecipe = async (req, res) => {
   let recipe = await Recipes.findById(req.params.id);
 
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     if (recipe) {
       let coverImage = req.file?.filename
         ? req.file?.filename
@@ -53,6 +56,9 @@ exports.updateRecipe = async (req, res) => {
 
 exports.createRecipe = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     const newRecipe = await Recipes.create(req.body);
 
     // const foundCategory = Categories.findById(req.body.category)

@@ -11,6 +11,9 @@ exports.getController = async (req, res) => {
 
 exports.newCategaryController = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     const newCategaries = await Categaries.create(req.body);
     res.status(201).json(newCategaries);
   } catch (error) {
@@ -36,6 +39,9 @@ exports.deletenewCategaryController = async (req, res) => {
 exports.updatenewCategaryController = async (req, res) => {
   const { categariestId } = req.params;
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     const foundCategaries = await Categaries.findById(categariestId);
     if (foundCategaries) {
       await foundCategaries.updateOne(req.body);
