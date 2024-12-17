@@ -4,10 +4,7 @@ const IngredientsSchema = new Schema({
   title: {
     type: String,
   },
-  ingredients: {
-    type: String,
-  },
-  instructions: {
+  amount: {
     type: String,
   },
 });

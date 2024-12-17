@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const path = require("path");
 const express = require("express");
 const connectDB = require("./database");
 const passport = require("passport");
@@ -21,6 +22,7 @@ app.use("/categaries", categariesRoutes);
 app.use("/recipes", recipesRoutes);
 app.use("/ingredients", ingredientsRoutes);
 app.use("/api/users", usersRouter);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 connectDB();
 

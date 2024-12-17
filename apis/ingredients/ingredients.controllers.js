@@ -11,6 +11,7 @@ exports.getController = async (req, res) => {
 
 exports.newIngredientController = async (req, res) => {
   try {
+    // req.body.map(async(ingredient) =>  await Ingredients.create(ingredient) )
     const newIngredients = await Ingredients.create(req.body);
     res.status(201).json(newIngredients);
   } catch (error) {

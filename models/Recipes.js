@@ -18,7 +18,7 @@ const RecipeSchema = new Schema(
     time: {
       type: String,
     },
-    coverImage: {
+    image: {
       type: String,
     },
     createdBy: {
