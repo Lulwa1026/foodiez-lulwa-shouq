@@ -7,11 +7,11 @@ const Users = require("./models/Users");
 
 exports.localStrategy = new LocalStrategy(
   { usernameField: "username" },
-  async (name, password, done) => {
+  async (username, password, done) => {
     try {
-      const user = await Users.findOne({ name });
+      const user = await Users.findOne({ username });
       const passwordsMatch = user
-        ? await bcrypt.compare(password, user.password)
+        ? bcrypt.compare(password, user.password)
         : false;
       if (passwordsMatch) {
         return done(null, user);
