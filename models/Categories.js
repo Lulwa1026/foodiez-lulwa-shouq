@@ -8,12 +8,6 @@ const CategoriesSchema = new Schema({
   image: {
     type: String,
   },
-  recipes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Recipes",
-    },
-  ],
 });
 
 module.exports = model("Categories", CategoriesSchema);
