@@ -19,33 +19,28 @@ exports.deleteRecipe = async (req, res) => {
   }
 };
 exports.updateRecipe = async (req, res) => {
-  const { editRecipe } = req.body;
-  let recipe = await Recipes.findById(req.params.id);
+  const { recipeId } = req.body;
+  const recipe = await Recipes.findById(req.params.id).populate("creator");
 
-  try {
-    if (recipe) {
-      let coverImage = req.file?.filename
-        ? req.file?.filename
-        : recipe.coverImage;
-      await Recipes.findByIdAndUpdate(
-        req.params.id,
-        { ...req.body, coverImage },
-        { new: true }
-      );
-      res.json({ editRecipe });
-    }
-  } catch (err) {
-    return res.status(404).json({ message: err });
+  const { user } = req;
+  if (user.id !== recipe.creator.id) {
+    return res.status(403).json("Sign in to get the best experience!");
   }
+  await recipe.updateOne(req.body);
+  const updateRecipe = await Recipes.findById(recipeId);
+  res.status(200).json(updateRecipe);
 };
 
 exports.createRecipe = async (req, res) => {
-  try {
-    const newRecipe = await Recipes.create(req.body).populate;
-    return res.status(201).json(newRecipe);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
+  const { user } = req;
+  if (user) {
+    req.body.creator = user.id;
+  } else {
+    res.status(401).json("Please Login!");
   }
+
+  const newRecipe = await Recipes.create(req.body);
+  return res.status(201).json(newRecipe);
 };
 
 exports.addIngredientToRecipe = async (req, res) => {

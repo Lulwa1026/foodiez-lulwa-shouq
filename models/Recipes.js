@@ -21,10 +21,10 @@ const RecipeSchema = new Schema(
     coverImage: {
       type: String,
     },
-    // createdBy: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   }
   //   { timestamps: true }
 );

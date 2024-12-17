@@ -5,7 +5,11 @@ const UserSchema = new Schema({
     type: String,
     unique: true,
   },
-  password: { type: string },
+  typ: {
+    type: String,
+    default: "USER",
+  },
+  password: { type: String },
   myRecipe: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
   favouriteRecipe: [
     {
