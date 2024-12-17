@@ -59,12 +59,15 @@ exports.createRecipe = async (req, res) => {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
+
     const newRecipe = await Recipes.create(req.body);
 
     // const foundCategory = Categories.findById(req.body.category)
     await Categories.findByIdAndUpdate(req.body.category, {
       $push: { recipes: newRecipe._id },
     });
+
+    const newRecipe = await Recipes.create(req.body).populate;
 
     return res.status(201).json(newRecipe);
   } catch (error) {
