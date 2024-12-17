@@ -3,21 +3,26 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const connectDB = require("./database");
-
-const recipeRoutes = require("./apis/recipes/recipes.routes");
-const categaryRoutes = require("./apis/categaries/categaries.routes");
-const ingredientRoutes = require("./apis/ingredients/ingredients.routes");
+const passport = require("passport");
+const app = express();
 const PORT = 8000;
 
-const app = express();
+const { localStrategy, jwtStrategy } = require("./passport");
+const recipesRoutes = require("./apis/recipes/recipes.routes");
+const categariesRoutes = require("./apis/categories/categaries.routes");
+const ingredientsRoutes = require("./apis/ingredients/ingredients.routes");
+const usersRouter = require("./apis/users/users.routes");
 
 app.use(express.json());
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
+app.use("/categaries", categariesRoutes);
+app.use("/recipes", recipesRoutes);
+app.use("/ingredients", ingredientsRoutes);
+app.use("/api/users", usersRouter);
 app.use("/media", express.static(path.join(__dirname, "media")));
-
-app.use("/categaries", categaryRoutes);
-app.use("/recipes", recipeRoutes);
-app.use("/ingredients", ingredientRoutes);
 
 connectDB();
 
